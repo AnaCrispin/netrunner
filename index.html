@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NetRunner – Conectados con Buenas Prácticas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <div id="main-menu" class="landing">
+        <div class="hero">
+            <div class="text-zone">
+                <h1>NetRunner</h1>
+                <p class="subtitle">Conectados con Buenas Prácticas</p>
+
+                <h3>Selecciona tu personaje:</h3>
+                <div class="character-selection">
+                    <button onclick="selectCharacter('dino')">🦖 Dino</button>
+                    <button onclick="selectCharacter('auto')">🚗 Auto</button>
+                </div>
+
+                <button id="play-btn" onclick="startGame()">JUGAR</button>
+            </div>
+
+            <div class="image-zone">
+                <img src="assets/dino2.png" alt="Personaje principal" class="main-character" id="preview-character">
+            </div>
+        </div>
+    </div>
+
+
+    <canvas id="gameCanvas" width="800" height="500" style="display: none;"></canvas>
+    <div id="final-screen" style="display:none;" class="centered">
+        <h2>¡Juego Terminado!</h2>
+        <p id="final-score">Tu puntaje: 0</p>
+        <button onclick="restartGame()">Volver a jugar</button>
+    </div>
+    <!-- Fondo animado en video -->
+    <video autoplay muted loop id="video-background">
+        <source src="assets/dino6.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+    </video>
+
+
+
+    <!-- Cargar FaceAPI -->
+    <script defer src="face-api.min.js"></script>
+
+    <script defer src="script.js"></script>
+</body>
+
+</html>
