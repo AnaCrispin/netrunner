@@ -2,18 +2,33 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>NetRunner – Conectados con Buenas Prácticas</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
-
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NetRunner – Inicio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet" />
+    <style>
+        /* Estilo del video de fondo */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="main-menu" class="landing">
+    <!-- Video de fondo -->
+    <video autoplay muted loop id="video-background">
+        <source src="assets/dino6.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+    </video>
+
+    <div class="landing">
         <div class="hero">
             <div class="text-zone">
                 <h1>NetRunner</h1>
@@ -25,34 +40,24 @@
                     <button onclick="selectCharacter('auto')">🚗 Auto</button>
                 </div>
 
-                <button id="play-btn" onclick="startGame()">JUGAR</button>
+                <button id="play-btn" onclick="goToGame()">JUGAR</button>
             </div>
-
             <div class="image-zone">
-                <img src="assets/dino2.png" alt="Personaje principal" class="main-character" id="preview-character">
+                <img src="assets/dino2.png" alt="Dino" class="main-character" id="preview-character" />
             </div>
         </div>
     </div>
 
+    <script>
+        function selectCharacter(character) {
+            localStorage.setItem("selectedCharacter", character);
+            document.getElementById("preview-character").src = character === "dino" ? "assets/dino2.png" : "assets/auto.png";
+        }
 
-    <canvas id="gameCanvas" width="800" height="500" style="display: none;"></canvas>
-    <div id="final-screen" style="display:none;" class="centered">
-        <h2>¡Juego Terminado!</h2>
-        <p id="final-score">Tu puntaje: 0</p>
-        <button onclick="restartGame()">Volver a jugar</button>
-    </div>
-    <!-- Fondo animado en video -->
-    <video autoplay muted loop id="video-background">
-        <source src="assets/dino6.mp4" type="video/mp4">
-        Tu navegador no soporta video HTML5.
-    </video>
-
-
-
-    <!-- Cargar FaceAPI -->
-    <script defer src="face-api.min.js"></script>
-
-    <script defer src="script.js"></script>
+        function goToGame() {
+            window.location.href = "game.html";
+        }
+    </script>
 </body>
 
 </html>

@@ -1,16 +1,27 @@
-/* Fondo general */
+/* === ESTILOS BASE === */
 body {
     margin: 0;
     font-family: 'Poppins', 'Segoe UI', sans-serif;
     background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
     color: white;
+    overflow: hidden;
+    position: relative;
+    height: 100vh;
 }
 
+/* === ANIMACIONES === */
+@keyframes float {
 
+    0%,
+    100% {
+        transform: translateY(0);
+    }
 
+    50% {
+        transform: translateY(-10px);
+    }
+}
 
-
-/* Animación de flotación suave */
 @keyframes floatText {
 
     0%,
@@ -19,13 +30,22 @@ body {
     }
 
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-10px);
     }
 }
 
+/* === VIDEO DE FONDO === */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
 
-
-/* Página de inicio */
+/* === ZONA DE INICIO === */
 .landing {
     display: flex;
     justify-content: center;
@@ -42,16 +62,38 @@ body {
     width: 90%;
     max-width: 1200px;
     gap: 80px;
-    /* Aumenta esta cantidad para separar más */
 }
 
-/* Zona de texto */
 .text-zone {
     max-width: 500px;
     padding: 20px;
     text-align: center;
 }
 
+.text-zone h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 6rem;
+    color: #ffffff;
+    position: relative;
+    padding: 20px 40px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, transparent 80%);
+    border-radius: 30px;
+    animation: floatText 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.text-zone h1::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    border-radius: 30px;
+    top: 10px;
+    left: 10px;
+    z-index: -2;
+    filter: blur(4px);
+}
 
 .subtitle {
     font-family: 'Baloo 2', cursive;
@@ -66,7 +108,7 @@ body {
     color: #fff;
 }
 
-/* Botones de personajes */
+/* === BOTONES === */
 .character-selection button,
 #play-btn {
     background: linear-gradient(180deg, #ffb347, #ff7b00);
@@ -77,48 +119,32 @@ body {
     padding: 12px 30px;
     margin: 10px;
     border: 3px solid white;
-    /* borde blanco como en la imagen */
     border-radius: 40px;
-    box-shadow:
-        inset 0 2px 4px rgba(255, 255, 255, 0.4),
-        /* brillo interno */
-        0 4px 12px rgba(0, 0, 0, 0.2);
-    /* sombra externa */
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
 }
 
 .character-selection button:hover,
 #play-btn:hover {
-    font-family: 'Baloo 2', cursive;
     transform: scale(1.05);
-    box-shadow:
-        inset 0 2px 4px rgba(255, 255, 255, 0.5),
-        0 6px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.5), 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-
-
-/* Botón JUGAR */
 #play-btn {
     margin-top: 25px;
-    font-family: 'Baloo 2', cursive;
     padding: 15px 50px;
     font-size: 1.2rem;
     background-color: #fb5607;
     border: none;
     border-radius: 15px;
-    cursor: pointer;
-    color: white;
-    transition: background-color 0.3s, transform 0.2s;
 }
 
 #play-btn:hover {
     background-color: #ff006e;
-    transform: scale(1.05);
 }
 
-/* Imagen del personaje */
+/* === IMAGEN PERSONAJE INICIO === */
 .image-zone {
     display: flex;
     align-items: center;
@@ -126,7 +152,6 @@ body {
     flex: 1;
     padding: 20px;
     margin-left: 40px;
-    /* Aumenta según lo que necesites */
 }
 
 .main-character {
@@ -135,30 +160,40 @@ body {
     animation: float 3s ease-in-out infinite;
 }
 
-
-
-/* Animación flotante */
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
+/* === CANVAS Y VIDEO === */
+#game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    height: 75vh;
 }
 
-
-/* Canvas del juego */
-canvas {
+#gameCanvas {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    background-color: #122636;
     border: 2px solid white;
-    display: block;
-    margin: 0 auto;
 }
 
-/* Pantalla final */
+#webcam-preview {
+    width: 25vw;
+    max-width: 200px;
+    height: auto;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 3px solid white;
+    z-index: 999;
+}
+
+/* === PANTALLA FINAL === */
 #final-screen {
     background: rgba(0, 0, 0, 0.9);
     color: white;
@@ -173,7 +208,6 @@ canvas {
     display: none;
     z-index: 999;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
 }
 
 #final-screen h2 {
@@ -186,7 +220,6 @@ canvas {
     margin-bottom: 20px;
 }
 
-/* Botón final */
 #final-screen button {
     padding: 14px 35px;
     font-size: 1.1rem;
@@ -202,56 +235,35 @@ canvas {
     background-color: #118ab2;
 }
 
-.text-zone h1 {
-    font-family: 'Baloo 2', cursive;
-    font-size: 6rem;
-    color: #ffffff;
-    position: relative;
-    display: inline-block;
-    padding: 20px 40px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, transparent 80%);
-    border-radius: 30px;
-    animation: floatText 3s ease-in-out infinite;
-    z-index: 2;
-}
-
-/* EFECTO 3D REAL usando múltiples sombras */
-
-
-/* Sombra profunda para más profundidad */
-.text-zone h1::after {
-    content: '';
+#level-indicator {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: black;
-    border-radius: 30px;
-    top: 10px;
-    left: 10px;
-    z-index: -2;
-    filter: blur(4px);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-family: 'Baloo 2', cursive;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 40px;
+    border-radius: 20px;
+    z-index: 9999;
+    display: none;
+    animation: fadeScale 1s ease;
 }
 
-/* Flotación animada */
-@keyframes floatText {
-
-    0%,
-    100% {
-        transform: translateY(0px);
+@keyframes fadeScale {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
     }
 
     50% {
-        transform: translateY(-10px);
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
     }
-}
 
-#video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    /* Para que esté detrás del contenido */
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
